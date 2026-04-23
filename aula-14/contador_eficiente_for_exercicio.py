@@ -27,15 +27,29 @@ print('----------------------------------')
 print(f'Média dos salários: R${media:.2f}')
 print('----------------------------------')
 
-print(f'Salários abaixo da média:')
+# Armazenar em uma lista os salários acima da média
+# Outra lista, porém pros abaixo da média 
+
+acima_media  = []
+abaixo_media = []
+
 for salario in salarios:
     if salario < media:
-        print(f'R${salario:.2f}')
-
-print(f'Acima da média:')
-for salario in salarios:
+        abaixo_media.append(salario)
     if salario > media:
-        print(f'R${salario:.2f}')
+        acima_media.append(salario)
 
-# Armazenar em uma lista os salários acima da média
-# Outra lista, porém pros abaixo da média
+if abaixo_media != []:
+    print('Salários abaixo da média:')
+    for i in abaixo_media:
+        print(f'R${i:.2f}')
+else:
+    print('Não há salários abaixo da média')
+
+
+if acima_media != []:
+    print('Salários acima da média:')
+    for i in acima_media:
+        print(f'R${i:.2f}')
+else:
+    print('Não há salários acima da média')
