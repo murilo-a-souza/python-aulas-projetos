@@ -26,4 +26,3 @@ while repete == 's':
     else :
         print('Os números são IGUAIS!')
     repete = input('Deseja repetir? (s/n) ')
-
