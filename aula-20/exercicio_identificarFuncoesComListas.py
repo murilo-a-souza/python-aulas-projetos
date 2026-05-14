@@ -57,12 +57,17 @@ def exibirJogos(jogos):
     for jogo in jogos:
         print(f'Jogo {jogos.index(jogo)+1} - {jogo}.')
 
-jogos = []
-while True:
+def menuJogos():
     print('===================================================================')
     print('MENU DE JOGOS')
     print('===================================================================')
     opcao = int(input('Qual ação você gostaria de realizar?\n1. Cadastrar jogos.\n2. Adicionar jogos\n3. Remover jogos\n4. Ordenar jogos\n5. Exibir jogos\n0. Sair\n'))
+    return opcao
+
+jogos = []
+
+while True:
+    opcao = menuJogos()
     match opcao:
         case 1:
             jogos = cadastrarJogos()
