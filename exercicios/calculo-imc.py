@@ -8,30 +8,30 @@ Calcula o IMC de uma pessoa.
 def recebe_peso():
     while True:
         peso = float(input('Digite seu peso (em KG usando . para decimais): '))
-        resp = input(f'Você confirma esse peso {peso}kg? (S/N)')
-        if resp.upper == 'S':
+        resp = input(f'Você confirma esse peso {peso}kg? (S/N) ')
+        if resp.upper() == 'S':
             break
     return peso
 
 def recebe_altura():
     while True:
         altura = float(input('Digite sua altura (em metros usando . para decimais): '))
-        resp = input(f'Você confirma essa altura {altura}m? (S/N)')
-        if resp.upper == 'S':
+        resp = input(f'Você confirma essa altura {altura}m? (S/N) ')
+        if resp.upper() == 'S':
             break
     return altura
 
 def recebe_idade():
     while True:
             idade = int(input('Digite sua idade: '))
-            resp = input(f'Você confirma essa idade: {idade}? (S/N)')
-            if resp.upper == 'S':
+            resp = input(f'Você confirma essa idade: {idade}? (S/N) ')
+            if resp.upper() == 'S':
                 break
     return idade
 
 def calcula_dados(peso, altura):
     imc = peso / (altura**2)
-    print('O calculo do IMC de {peso} e {altura} é {imc}')
+    print(f'O calculo do IMC de {peso} e {altura} é {imc}')
     return imc
 
 def classificar_imc(imc):
@@ -43,7 +43,7 @@ def classificar_imc(imc):
             classificacao = "Sobrepeso"
     elif imc >= 30:
             classificacao = "Obesidade"
-    print('A classificação do IMC {imc} é {classificacao:.2f}')
+    print(f'A classificação do IMC {imc} é {classificacao}')
     return classificacao
 
 def menu():
@@ -53,7 +53,7 @@ def menu():
     imc = 0
     classificacao = 'N/A'
     while True:
-        opcao = int(input(f'--- Valores atuais ---\nPeso: {peso}\nAltura: {altura}\nIdade: {idade}\nIMC: {imc:.2f}\nClassificação: {classificacao}\n\n--- Menu de opções ---\nDigite uma opção:\n1. Obter peso\n2. Obter altura\n3. Registrar idade (opcional)\n4. Realizar Calculo\n5. Classificar IMC\n0. Sair\n'))
+        opcao = int(input(f'--- Valores atuais ---\nPeso: {peso}Kg\nAltura: {altura}m\nIdade: {idade} ano(s)\nIMC: {imc:.2f}\nClassificação: {classificacao}\n\n--- Menu de opções ---\nDigite uma opção:\n1. Obter peso\n2. Obter altura\n3. Registrar idade (opcional)\n4. Realizar Calculo\n5. Classificar IMC\n0. Sair\n'))
         match opcao:
             case 1:
                 peso = recebe_peso()
