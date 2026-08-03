@@ -1,9 +1,10 @@
-def receber_numero(algarismos: string = '0'):
+def receber_numero(algarismos: str = '0'):
+    algarismos = algarismos.strip()
     algDivs = list(algarismos)
     return algDivs
 
 def encontrar_maior_produto(algDivs : list):
-    produto = 0
+    produto = -1
     for x in range(len(algDivs)):
         algDivs[x] = int(algDivs[x])
         for y in range(x+1, len(algDivs)): #percorre a lista na posição 1
