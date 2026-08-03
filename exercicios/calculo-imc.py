@@ -47,13 +47,13 @@ def classificar_imc(imc):
     return classificacao
 
 def menu():
-    altura = 0
+    altura = 0 # essas variaveis servem mostrar os valores que são recebidos
     peso = 0
     idade = 0
     imc = 0
     classificacao = 'N/A'
     while True:
-        opcao = int(input(f'+++++++++ CALCULADORA DE IMC +++++++++\n\nPeso: {peso}\nAltura: {altura}\nIdade: {idade}\nIMC: {imc:.2f}\nClassificação: {classificacao}\n\nDigite uma opção:\n1. Obter peso\n2. Obter altura\n3. Registrar idade (opcional)\n4. Realizar Calculo\n5. Classificar IMC\n0. Sair\n'))
+        opcao = int(input(f'--- Valores atuais ---\nPeso: {peso}\nAltura: {altura}\nIdade: {idade}\nIMC: {imc:.2f}\nClassificação: {classificacao}\n\n--- Menu de opções ---\nDigite uma opção:\n1. Obter peso\n2. Obter altura\n3. Registrar idade (opcional)\n4. Realizar Calculo\n5. Classificar IMC\n0. Sair\n'))
         match opcao:
             case 1:
                 peso = recebe_peso()
@@ -78,4 +78,5 @@ def menu():
         if opcao == 0:
             return
 
+print('+++++++++ CALCULADORA DE IMC +++++++++')
 menu()
