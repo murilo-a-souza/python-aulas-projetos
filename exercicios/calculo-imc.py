@@ -9,7 +9,7 @@ def recebe_peso():
     while True:
         peso = float(input('Digite seu peso (em KG usando . para decimais): '))
         resp = input(f'Você confirma esse peso {peso}kg? (S/N)')
-        if resp == 'S':
+        if resp.upper == 'S':
             break
     return peso
 
@@ -17,7 +17,7 @@ def recebe_altura():
     while True:
         altura = float(input('Digite sua altura (em metros usando . para decimais): '))
         resp = input(f'Você confirma essa altura {altura}m? (S/N)')
-        if resp == 'S':
+        if resp.upper == 'S':
             break
     return altura
 
@@ -25,7 +25,7 @@ def recebe_idade():
     while True:
             idade = int(input('Digite sua idade: '))
             resp = input(f'Você confirma essa idade: {idade}? (S/N)')
-            if resp == 'S':
+            if resp.upper == 'S':
                 break
     return idade
 
