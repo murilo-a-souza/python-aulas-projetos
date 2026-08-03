@@ -2,7 +2,7 @@
 Calcula o IMC de uma pessoa.
 - Leitura de peso e altura (uma ou duas funções)
 - Calcula os dados
-- Retorno
+- Retorno dos dados
 '''
 
 def recebe_peso():
@@ -20,6 +20,14 @@ def recebe_altura():
         if resp == 'S':
             break
     return altura
+
+def recebe_idade():
+    while True:
+            idade = int(input('Digite sua idade: '))
+            resp = input(f'Você confirma essa idade: {idade}? (S/N)')
+            if resp == 'S':
+                break
+    return idade
 
 def calcula_dados(peso, altura):
     imc = peso / (altura**2)
@@ -45,25 +53,28 @@ def menu():
     imc = 0
     classificacao = 'N/A'
     while True:
-        opcao = int(input(f'+++++++++ CALCULADORA DE IMC +++++++++\n\nPeso: {peso}\nAltura: {altura}\nIdade: {idade}\nIMC: {imc:.2f}\nClassificação: {classificacao}\n\nDigite uma opção:\n1. Obter peso\n2. Obter altura\n3. Realizar Calculo\n4. Classificar IMC\n0. Sair\n'))
+        opcao = int(input(f'+++++++++ CALCULADORA DE IMC +++++++++\n\nPeso: {peso}\nAltura: {altura}\nIdade: {idade}\nIMC: {imc:.2f}\nClassificação: {classificacao}\n\nDigite uma opção:\n1. Obter peso\n2. Obter altura\n3. Registrar idade (opcional)\n4. Realizar Calculo\n5. Classificar IMC\n0. Sair\n'))
         match opcao:
             case 1:
                 peso = recebe_peso()
-                print('--------------------------------')
+                print('--------------------------------------')
             case 2:
                 altura = recebe_altura()
-                print('--------------------------------')
+                print('--------------------------------------')
             case 3:
-                imc = calcula_dados(peso, altura)
-                print('--------------------------------')
+                idade = recebe_idade()
+                print('--------------------------------------')
             case 4:
+                imc = calcula_dados(peso, altura)
+                print('--------------------------------------')
+            case 5:
                 classificacao = classificar_imc(imc)
-                print('--------------------------------')
+                print('--------------------------------------')
             case 0:
                 print('Encerrando...')
             case _:
                 print('Opção inválida')
-                print('--------------------------------')
+                print('--------------------------------------')
         if opcao == 0:
             return
 
