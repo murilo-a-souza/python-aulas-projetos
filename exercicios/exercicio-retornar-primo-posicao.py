@@ -15,4 +15,4 @@ def retornaPrimo(ind : int):
         num += 1
     return primos[ind - 1]
 
-print(retornaPrimo(int(input("Digite a posição do primo que você quer (1-x): "))))
+print('O número primo desta posição é: ', retornaPrimo(int(input('Digite a posição do primo que você quer (1-x): '))))
