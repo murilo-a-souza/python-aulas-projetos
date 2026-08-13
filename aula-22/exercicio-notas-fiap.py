@@ -1,83 +1,86 @@
- 
-def descarta_menor(cps: list):
-    if cps[0] < cps[1] and cps[0] < cps [2]: 
-        cps.pop[0]
-        return cps
-    if cps[1] < cps[0] and cps[1] < cps [2]: 
-        cps.pop[1]
-        return cps
-    if cps[2] < cps[1] and cps[2] < cps [0]:
-        cps.pop[2]
-        return cps
-    cps.pop()
-    return cps #previne de não retornar nada se odos forem iguais
-    
+def calcular_media_cps(notas_cp):
+    menor_nota = notas_cp[0]
+    soma_total = 0
+    for nota in notas_cp:
+        if nota < menor_nota:
+            menor_nota = nota
+        soma_total += nota
+    soma_total -= menor_nota
+    return soma_total
 
-def calculo_semestral(cp1: float, cp2: float, cp3: float, sprint1: float, sprint2: float, gs: float):
-    #retornar menor cp e subtrai ele
-    cps = descarta_menor([cp1, cp2, cp3])
-    soma = 0
-    for x in cps:
-        soma += x
-    soma /= 2
-    return soma*0.2 + sprint1*0.1 + sprint2*0.1 + gs*0.6
 
-def registrar_valores():
-    notas = {}
-    notas.setdefault("cp1", float(input('Digite a nota do primeiro cp: ')))
-    notas.setdefault("cp2", float(input('Digite a nota do segundo cp: ')))
-    notas.setdefault("cp3", float(input('Digite a nota do terceiro cp: ')))
-    notas.setdefault("sprint1", float(input('Digite a nota da primeira Sprint: ')))
-    notas.setdefault("sprint2", float(input('Digite a nota da segunda Sprint: ')))
-    notas.setdefault("gs", float(input('Digite a nota da GS: ')))
-    return notas
-    
+def calcular_media_sprints(sprints):
+    soma_total = 0
+    for nota in sprints:
+        soma_total += nota
+    media = soma_total / len(sprints)
+    return media
 
-def nota_geral(nota1s, nota2s):
-    return nota1s*0.4 + nota2s*0.6
+def calcular_media_semestre(notas_cp, sprints, gs):
+    media_semestre = calcular_media_cps(notas_cp)*0.2 + calcular_media_sprints(sprints)*0.2 + gs*0.6
+    return media_semestre
 
-def menu_geral():
-    cp1 = 0
-    cp2 = 0
-    cp3 = 0
-    sp1 = 0
-    sp2 = 0
-    gs = 0
-    scp1 = 0
-    scp2 = 0
-    scp3 = 0
-    ssp1 = 0
-    ssp2 = 0
-    sgs = 0
+def receber_valores():
     while True:
+        opcao = int(input('Digite qual valor você quer adicionar:\n1. Todos (CPs, Sprints e GS)\n2. Apenas CPs\n3. Apenas Sprints\n4. Apenas GS\n5. Voltar\n'))
         notas = {}
-        opcao = int(input(f'CALCULADORA DE NOTAS FIAP\n----------------------------------\nNotas atuais:\nPRIMEIRO SEMESTRE: cp1={cp1:.1f} cp2={cp2:.1f} cp3={cp3:.1f} sp1={sp1:.1f} sp2={sp1:.1f} gs={gs:.1f}\nSEGUNDO SEMESTRE: cp1={scp1:.1f} cp2={scp2:.1f} cp3={scp3:.1f} sp1={ssp1:.1f} sp2={ssp1:.1f} gs={sgs:.1f}\n----------------------------------\nDigite uma opção abaixo:\n1. Calcular notas do primeiro\n2. Calcular notas do segundo\n3. Retornar média geral\n4. Sair'))
+        match opcao:
+                case 1:
+                    notas.setdefault('cp1', int(input('Digite a nota do CP1: ')))
+                    notas.setdefault('cp2', int(input('Digite a nota do CP2: ')))
+                    notas.setdefault('cp3', int(input('Digite a nota do CP3: ')))
+                    notas.setdefault('sp1', int(input('Digite a nota da Sprint 1: ')))
+                    notas.setdefault('sp2', int(input('Digite a nota da Sprint 2: ')))
+                    notas.setdefault('gs', int(input('Digite a nota da GS: ')))
+                    return notas.items()
+                case 2:
+                    notas.setdefault('cp1', int(input('Digite a nota do CP1: ')))
+                    notas.setdefault('cp2', int(input('Digite a nota do CP2: ')))
+                    notas.setdefault('cp3', int(input('Digite a nota do CP3: ')))
+                    return notas.items()
+                case 3:
+                    notas.setdefault('sp1', int(input('Digite a nota da Sprint 1: ')))
+                    notas.setdefault('sp2', int(input('Digite a nota da Sprint 2: ')))
+                    return notas.items()
+                case 4:
+                    notas.setdefault('gs', int(input('Digite a nota da GS: ')))
+                    return notas.items()
+                case 5:
+                    return {}
+                case _:
+                    print('Opção inválida!')
+
+def calcular_media_final(semestre1, semestre2):
+    media_final = semestre1*0.4 + semestre2['media']*0.6
+    return media_final
+
+def menu_relatorio():
+    notas1 = dict.fromkeys(['cp1', 'cp2', 'cp3', 'sp1', 'sp2', 'gs', 'media'], 0)
+    notas2 = dict.fromkeys(['cp1', 'cp2', 'cp3', 'sp1', 'sp2', 'gs', 'media'], 0)
+    media_final = 0
+    situacao = 'N/A'
+    while True:
+        print(f"------------------------------------------------------------------------------\nCALCULADORA DE MÉDIA FIAP\n------------------------------------------------------------------------------\nNotas 1ºSemestre:\ncp1= {notas1.get('cp1'):.2f}; cp2= {notas1.get('cp2'):.2f}; cp3= {notas1.get('cp3'):.2f}; sp1= {notas1.get('sp1'):.2f}; sp2= {notas1.get('sp2'):.2f}; gs= {notas1.get('gs'):.2f}; media= {notas1.get('media'):.2f}\n\nNotas 2ºSemestre:\ncp1= {notas2.get('cp1'):.2f}; cp2= {notas2.get('cp2'):.2f}; cp3= {notas2.get('cp3'):.2f}; sp1= {notas2.get('sp1'):.2f}; sp2= {notas2.get('sp2'):.2f}; gs= {notas2.get('gs'):.2f}; media= {notas2.get('media'):.2f}\n\nMédia final= {media_final:.2f}; Situação= {situacao}\n------------------------------------------------------------------------------")
+        opcao = int(input('Digite uma opção:\n1. Primeiro semestre\n2. Segundo semestre\n3. Sair\n'))
         match opcao:
             case 1:
-                notas = registrar_valores()
-                cp1 = notas.get("cp1")
-                cp2 = notas.get("cp2")
-                cp3 = notas.get("cp3")
-                sp1 = notas.get("sp1")
-                sp2 = notas.get("sp2")
-                gs = notas.get("gs")
+                novas_notas = receber_valores()
+                for chave, item in novas_notas:
+                    notas1[chave] = item
+                notas1['media'] = calcular_media_semestre([notas1.get('cp1'), notas1.get('cp2'), notas1.get('cp3')], [notas1.get('sp1'), notas1.get('sp2')], notas1.get('gs'))
+                print(f'Média semestral: {calcular_media_semestre([notas1.get('cp1'), notas1.get('cp2'), notas1.get('cp3')], [notas1.get('sp1'), notas1.get('sp2')], notas1.get('gs'))}')
             case 2:
-                scp1 = float(notas.get("cp1"))
-                scp2 = float(notas.get("cp2"))
-                scp3 = float(notas.get("cp3"))
-                ssp1 = float(notas.get("sp1"))
-                ssp2 = float(notas.get("sp2"))
-                sgs = float(notas.get("gs"))
+                novas_notas = receber_valores()
+                for chave, item in novas_notas:
+                    notas2[chave] = item
+                notas2['media'] = calcular_media_semestre([notas2.get('cp1'), notas2.get('cp2'), notas2.get('cp3')], [notas2.get('sp1'), notas2.get('sp2')], notas2.get('gs'))
             case 3:
-                print('Sua média anual é: ', nota_geral(
-                    calculo_semestral(cp1, cp2, cp3, sp1, sp2, gs),
-                    calculo_semestral(scp1, scp2, scp3, ssp1, ssp2, sgs)))
-            case 4:
-                print('Encerrando')
-        if opcao == 0:
-            break
-                
+                return
+        media_final = calcular_media_final( notas1['media'], notas2['media'])
+        if media_final > 6:
+            situacao = 'APROVADO!'
+        else:
+            situacao = 'REPROVADO!'
+            
 
-
-
-menu_geral()
+menu_relatorio()
