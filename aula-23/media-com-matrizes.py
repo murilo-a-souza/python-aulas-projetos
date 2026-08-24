@@ -1,30 +1,3 @@
-def criar_matriz(alunos:list, n_notas:int):
-    print('---------------------------------------\nRegistro de notas\n---------------------------------------')
-    matriz = []
-    for i in range(len(alunos)):
-        n = []
-        for j in range(n_notas):
-            n.append(float(input(f'Digite a {j+1}º nota do aluno {alunos[i]}: ')))
-        print('-------------')
-        matriz.append(n)
-    return matriz
-
-def mostrar_resultados(notas: list, alunos:list):
-    medias = media_sem_sum(notas)
-    print('---------------------------------------\nMédias dos alunos\n---------------------------------------')
-    for i in range(len(medias)):
-        print(f'Aluno: {alunos[i]}\t|\tMédia: {medias[i]:.1f}')
-    input('---------------------------------------\nENTER para continuar...')
-
-def media_sem_sum(matriz:list):
-    medias = []
-    for linha in matriz:
-        soma = 0
-        for n in linha:
-            soma += n
-        medias.append(soma/len(linha))
-    return medias
-
 def criar_nomes():
     alunos = []
     print('---------------------------------------\nRegistro de nomes\n---------------------------------------')
@@ -61,6 +34,32 @@ def remover_nomes(alunos:list):
             return alunos
         alunos.pop(aluno-1)
 
+def criar_matriz(alunos:list, n_notas:int):
+    print('---------------------------------------\nRegistro de notas\n---------------------------------------')
+    matriz = []
+    for i in range(len(alunos)):
+        n = []
+        for j in range(n_notas):
+            n.append(float(input(f'Digite a {j+1}º nota do aluno {alunos[i]}: ')))
+        print('-------------')
+        matriz.append(n)
+    return matriz
+
+def media_sem_sum(matriz:list):
+    medias = []
+    for linha in matriz:
+        soma = 0
+        for n in linha:
+            soma += n
+        medias.append(soma/len(linha))
+    return medias
+
+def mostrar_resultados(notas: list, alunos:list):
+    medias = media_sem_sum(notas)
+    print('---------------------------------------\nMédias dos alunos\n---------------------------------------')
+    for i in range(len(medias)):
+        print(f'Aluno: {alunos[i]}\t|\tMédia: {medias[i]:.1f}')
+    input('---------------------------------------\nENTER para continuar...')
 
 def menu():
     print('---------------------------------------\nCalculadora de Média')
@@ -85,6 +84,5 @@ def menu():
                 mostrar_resultados(notas, alunos)
             case 0: return
             case _: input('----- Opção inválida!! -----\nENTER para retornar...')
-
 
 menu()
