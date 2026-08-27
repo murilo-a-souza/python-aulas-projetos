@@ -71,5 +71,4 @@ def menu():
             case _:
                 print('----- Opção inválida!! -----')
 
-
 menu()
