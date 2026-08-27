@@ -1,21 +1,41 @@
-def calcular_medias(matriz:list):
-    medias = []
-    for linha in matriz:
-        soma = sum(linha)
-        medias.append(sum(linha)/len(linha))
-    return medias
+def criar_nomes():
+    alunos = []
+    print('---------------------------------------\nRegistro de nomes\n---------------------------------------')
+    while True:
+        aluno = input(f'Digite o nome do aluno ou \"fim\": ')
+        if aluno == 'fim':
+            return alunos
+        alunos.append(aluno)
+    print(n, '\n')
 
-def mostrar_matriz(matriz:list):
-    for linha in matriz:
-        print(linha)
+def mostrar_nomes(alunos:list):
+    s = ''
+    for n in alunos:
+        s += f'- {n} '
+    return s
 
-def mostrar_resultados(matriz: list, alunos:list):
-    medias = media_sem_sum(matriz)
-    for i in range(len(medias)):
-        print(f'Aluno: {alunos[i]}\t|\tMédia: {medias[i]:.1f}')
-    print('-------------\n')
+def alterar_nomes(alunos:list):
+    s = ''
+    print('---------------------------------------\nAlteração de nomes\n---------------------------------------\n')
+    for n in range(0,len(alunos)):
+            s += f'{n+1}- {alunos[n]}\n'
+    print(s)
+    n = int(input('Digite o número do nome que você quer alterar: '))
+    alunos[n-1] = input('Digite o novo nome: ')
+    return alunos
+
+def remover_nomes(alunos:list):
+    print('---------------------------------------\nRemoção de nomes\n---------------------------------------\n')
+    for i in range(len(alunos)):
+        print(f'{i+1} - {alunos[i]}')
+    while True:
+        aluno = int(input(f'Digite o número do aluno para remover ou \"0\" para encerrar: '))
+        if aluno == 0:
+            return alunos
+        alunos.pop(aluno-1)
 
 def criar_matriz(alunos:list, n_notas:int):
+    print('---------------------------------------\nRegistro de notas\n---------------------------------------')
     matriz = []
     for i in range(len(alunos)):
         n = []
@@ -34,41 +54,35 @@ def media_sem_sum(matriz:list):
         medias.append(soma/len(linha))
     return medias
 
-def criar_nomes():
-    alunos = []
-    while True:
-        aluno = input(f'Digite o nome do aluno ou \"fim\": ')
-        if aluno == 'fim':
-            return alunos
-        alunos.append(aluno)
-
-def remover_nomes(alunos:list):
-    for i in range(len(alunos)):
-        print(f'{i+1} - {alunos[i]}')
-    while True:
-        aluno = int(input(f'Digite o número do aluno para remover ou \"0\" para encerrar: '))
-        if aluno == 0:
-            return alunos
-        alunos.pop(aluno-1)
-
+def mostrar_resultados(notas: list, alunos:list):
+    medias = media_sem_sum(notas)
+    print('---------------------------------------\nMédias dos alunos\n---------------------------------------')
+    for i in range(len(medias)):
+        print(f'Aluno: {alunos[i]}\t|\tMédia: {medias[i]:.1f}')
+    input('---------------------------------------\nENTER para continuar...')
 
 def menu():
-    print('--- Calculadora de Média ---\nRegistre alunos:')
+    print('---------------------------------------\nCalculadora de Média')
     alunos = criar_nomes()
+    notas = []
     while True:
-        opcao = int(input(f'--- Calculadora de Média ---\n\nAlunos = {alunos}\n\n1. Registrar nomes\n2. Remover nomes\n3. Calcular média\n4. Sair\n\nDigite uma opção: '))
+        opcao = int(input(f'---------------------------------------\nCalculadora de Média\n---------------------------------------\n\nAlunos = {mostrar_nomes(alunos)}\n\n1. Registrar nomes\n2. Mostrar nomes\n3. Alterar nomes\n4. Remover nomes\n5. Registrar notas\n6. Calcular média e mostrar\n0. Sair\n\nDigite uma opção: '))
         match opcao:
             case 1:
                 novos_nomes = criar_nomes()
                 for aluno in novos_nomes:
                     alunos.append(aluno)
-            case 2:
-                alunos = remover_nomes(alunos)
+            case 2: 
+                input(f'---------------------------------------\n {mostrar_nomes(alunos)}\n---------------------------------------\nENTER para continuar...')
             case 3:
-                mostrar_resultados(criar_matriz(alunos, int(input('Digite quantas notas cada aluno terá: '))), alunos)
+                alunos = alterar_nomes(alunos)
             case 4:
-                return
-            case _:
-                print('----- Opção inválida!! -----')
+                alunos = remover_nomes(alunos)
+            case 5:
+                notas = criar_matriz(alunos, int(input('Digite quantas notas cada aluno terá: ')))
+            case 6: 
+                mostrar_resultados(notas, alunos)
+            case 0: return
+            case _: input('----- Opção inválida!! -----\nENTER para retornar...')
 
 menu()
